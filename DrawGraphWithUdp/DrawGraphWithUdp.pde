@@ -2,6 +2,7 @@ import hypermedia.net.*;
 UDP udp;
 final int port = 12345; // Constant, cannot be modified
 
+final int header = 10; // header value
 String inString;
 
 float[] buf = new float[600];
@@ -42,14 +43,14 @@ void draw() {
 
 void receive(byte[] data) {
   inString =  new String(data);
-  //println(inString); // sentence by udp
+  // println("rcv:" + inString); // sentence via udp
   String[] q = splitTokens(inString, " ");
 
   switch(int(q[0])) {
-    case 10: // check
+    case header: // header check
       value = float(q[1]);
+      break;
+    default:
       break;
   }  
 }
-
-
